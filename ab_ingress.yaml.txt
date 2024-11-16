@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: ab-ingress
+spec:
+  ingressClassName: nginx
+  rules:
+    - host: anika.coureur.life
+      http:
+        paths:
+        - path: /
+          pathType: Prefix
+          backend:
+            service:
+              name: ab-fe
+              port:
+                number: 80
+        - path: /reviews
+          pathType: Prefix
+          backend:
+            service:
+              name: ab-server
+              port:
+                number: 8081
